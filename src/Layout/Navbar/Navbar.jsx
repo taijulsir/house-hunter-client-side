@@ -37,7 +37,7 @@ const Navbar = () => {
             {/* For large device */}
             <div className="hidden md:flex flex-col">
                 {/* 1st part of navbar  */}
-                <div className="w-full bg-[#306ba9] py-5">
+                <div className="w-full bg-gradient-to-r from-sky-300 via-blue-500 to-sky-300 py-5">
                     <div className="md:max-w-6xl mx-auto flex justify-between  items-center">
                         <div>
                             <img src="https://theme.easital.com/html/findhusly/v1.0/assets/img/logo-white.png" alt="" className="w-[200px] h-12" />
@@ -79,7 +79,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Navlink all route part */}
-                <div className="w-full bg-[#222]">
+                <div className="w-full bg-gradient-to-r from-black via-gray-800 to-black">
                     <div className="md:max-w-6xl mx-auto flex justify-between items-center py-4">
                         <div>
                             <ul className="flex items-center ml-16">

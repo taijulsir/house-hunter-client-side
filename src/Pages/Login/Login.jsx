@@ -1,23 +1,36 @@
 
 
 import { useState } from "react";
-import { Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import loginAnimation from "../../Shared/LottieAnimation/login - 1699455072449.json"
 import Lottie from "lottie-react";
+import useAxiosPublic from "../../Hooks/useAxiosPublic/useAxiosPublic";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
-    const handleEmailLogin = (e) => {
+    const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
+    const handleEmailLogin = async (e) => {
         e.preventDefault()
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(email,password)
-       
+
+        const loginInfo = {email,password}
+        const res = await axiosPublic.post("/api/login",loginInfo)
+        if(res.status === 200){
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Login succesfull.',
+              });
+              navigate("/")
+        }
     }
 
-
+    // lottie animation
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -94,11 +107,11 @@ const Login = () => {
                                             <p className="text-sm text-white dark:text-gray-400"> Need an account?
                                                 <Link to='/register'
                                                     className="text-sm font-semibold text-zinc-950 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500">
-                                                     Create an account</Link>
+                                                    Create an account</Link>
                                             </p>
                                         </form>
 
-                                       
+
                                     </div>
                                 </div>
                             </div>

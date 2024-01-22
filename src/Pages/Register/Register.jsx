@@ -1,13 +1,15 @@
 
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import register from '../../Shared/LottieAnimation/login - 1699455072449.json'
 import Lottie from "lottie-react";
+import useAxiosPublic from "../../Hooks/useAxiosPublic/useAxiosPublic";
+import toast, { Toaster } from "react-hot-toast";
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
-
-
+    const axiosPublic = useAxiosPublic()
+    const navigate = useNavigate()
     // animation
     const defaultOptions = {
         loop: true,
@@ -18,7 +20,7 @@ const Register = () => {
     };
 
     // email Register
-    const handleEmailRegister = (e) => {
+    const handleEmailRegister = async (e) => {
         e.preventDefault();
         const name = e.target.name.value;
         const email = e.target.email.value;
@@ -26,12 +28,26 @@ const Register = () => {
         const role = e.target.role.value;
         const password = e.target.password.value;
         const photoUrl = e.target.photoUrl.value;
-        console.log(email, password, name, photoUrl,phoneNumber,role)
+        if(phoneNumber.length >11 || phoneNumber.length <11){
+          return toast.error("Number will be 11 character");
+        }
+        if(password.length < 6){
+            return toast.error("Password at least 6 character")
+        }
+        const userData = {
+            name, email, phoneNumber, role, password, photoUrl
+        }
+        const res = await axiosPublic.post("/api/register", userData)
+        console.log(res.data)
+        if (res.data.insertedId) {
+            toast.success("Register Succesful")
+            navigate("/login")
+        }
+        else if (res.data.insertedId === null) {
+            return  toast.error("Already Registered");         
+        }
 
     }
-
-
-
     return (
         <div>
             <div className="bg-gradient-to-r from-sky-300 via-blue-500 to-sky-500 min-h-screen text-gray-900 flex justify-center ">
@@ -60,14 +76,14 @@ const Register = () => {
                                         <input
                                             className="w-full mt-3 px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                             name="phoneNumber" type="number" placeholder="Phone Number" required />
-                                            {/* Role */}
-                                            <div>
-                                                <select name="role" id="" className="w-full text-gray-500 mt-3 px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
-                                                    <option value="" selected disabled className="text-gray-500">Select Role</option>
-                                                    <option value="Howse Owner" className="text-gray-500">Howse Owner</option>
-                                                    <option value="House Renter" className="text-gray-500">House Renter</option>
-                                                </select>
-                                            </div>
+                                        {/* Role */}
+                                        <div>
+                                            <select name="role" id="" className="w-full text-gray-500 mt-3 px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                                                <option value="" selected disabled className="text-gray-500">Select Role</option>
+                                                <option value="Howse Owner" className="text-gray-500">Howse Owner</option>
+                                                <option value="House Renter" className="text-gray-500">House Renter</option>
+                                            </select>
+                                        </div>
                                         {/* password */}
                                         <div>
                                             <div className="relative">
@@ -123,6 +139,7 @@ const Register = () => {
                     </div>
                 </div>
             </div>
+            <Toaster></Toaster>
         </div>
     );
 };

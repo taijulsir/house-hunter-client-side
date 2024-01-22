@@ -60,7 +60,6 @@ const Login = () => {
                                             {/* email */}
                                             <div className="mb-4">
                                                 <input type="text"
-
                                                     className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                                                     name="email" placeholder="Your email" required />
                                             </div>
@@ -95,7 +94,7 @@ const Login = () => {
                                             <p className="text-sm text-white dark:text-gray-400"> Need an account?
                                                 <Link to='/register'
                                                     className="text-sm font-semibold text-zinc-950 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500">
-                                                    Create an account</Link>
+                                                     Create an account</Link>
                                             </p>
                                         </form>
 

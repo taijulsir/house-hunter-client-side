@@ -21,6 +21,12 @@ const Login = () => {
         const loginInfo = { email, password }
         const res = await axiosPublic.post("/api/login", loginInfo)
         if (res.status === 200) {
+            // set jwt token in local storage
+            const jwtResponse = await axiosPublic.post('/api/jwt', loginInfo)
+            const token = jwtResponse.data;
+            localStorage.setItem("access-token", token)
+
+            // save user email in authprovider
             setUserEmail(email)
             Swal.fire({
                 icon: 'success',

@@ -6,12 +6,13 @@ import { IoMenuSharp } from "react-icons/io5";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { useState } from "react";
 import useAuth from "../../Hooks/useAuth/useAuth";
+
 const Navbar = () => {
-    const {user,logOut} = useAuth;
-    console.log(user)
+    const { logOut } = useAuth()
+    const user = true;
     const [sideBar, setSidebar] = useState(false)
     const handleSignOUt = () => {
-      return logOut();
+        logOut()
     }
     const navlinks =
         <>
@@ -58,7 +59,7 @@ const Navbar = () => {
                                     <option value="English" className=" text-zinc-950">
                                         English</option>
                                     <option value="" className=" text-zinc-950">
-                                       Bangla</option>
+                                        Bangla</option>
                                     <option value="" className=" text-zinc-950">
                                         Hindi</option>
                                 </select>
@@ -134,7 +135,7 @@ const Navbar = () => {
                 </div>
 
                 <div>
-                    <img src="https://theme.easital.com/html/findhusly/v1.0/assets/img/logo-white.png" alt="" className=" h-12 object-cover"/>
+                    <img src="https://theme.easital.com/html/findhusly/v1.0/assets/img/logo-white.png" alt="" className=" h-12 object-cover" />
                 </div>
                 {/* Website Logo */}
                 <div >

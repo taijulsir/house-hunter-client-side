@@ -6,11 +6,9 @@ import register from '../../Shared/LottieAnimation/login - 1699455072449.json'
 import Lottie from "lottie-react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic/useAxiosPublic";
 import toast, { Toaster } from "react-hot-toast";
-import useAuth from "../../Hooks/useAuth/useAuth";
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const axiosPublic = useAxiosPublic()
-    const { loginUser } = useAuth()
     const navigate = useNavigate()
 
     // email Register
@@ -40,7 +38,6 @@ const Register = () => {
         // Send data into server side
         const res = await axiosPublic.post("/api/register", userData)
         if (res.data.insertedId) {
-            loginUser(userData)
             toast.success("Register Succesful")
             navigate("/login")
         }

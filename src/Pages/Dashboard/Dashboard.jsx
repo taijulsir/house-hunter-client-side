@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth/useAuth";
 import useCheckUserRole from "../../Hooks/useCheckUserRole/useCheckUserRole";
-import Shared from "./Shared/Shared";
 import DashboardNav from "./DashboardNav/DashboardNav";
 import RenterDashboard from "./RenterDashboard/RenterDashboard.js";
 import OwnerDashboard from "./OwnerDashboard/OwnerDashboard.jsx.jsx";
@@ -39,7 +38,7 @@ const Dashboard = () => {
 
                             {/* website logo */}
                             <div
-                                className="flex items-center w-full px-4 pt-4 pb-4 mb-4 dark:border-gray-700">
+                                className="flex items-center w-full px-4 pt-4 pb-4 mb-4 border-b border-white dark:border-gray-700">
                                 <Link to='/'>
                                     <div className="flex items-center ml-2">                             
                                         <img src="https://theme.easital.com/html/findhusly/v1.0/assets/img/logo-white.png" className='h-12 w-28 lg:h-8 lg:w-32' alt="" />
@@ -71,13 +70,7 @@ const Dashboard = () => {
                                 </ul>
                             </div>
 
-                            <div className="divider divider-warning mt-12 px-6"></div>
-                            {/* available all routes */}
-                            <div className="pb-6 mt-4  ">
-                                <ul className=" list-none">
-                                    <Shared></Shared>
-                                </ul>
-                            </div>
+                    
                         </nav>
                     </div>
 

@@ -6,6 +6,10 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import Overview from "../Pages/Dashboard/Overview/Overview";
+import ManageBookings from "../Pages/Dashboard/ManageBookings/ManageBookings";
+import ManageHouse from "../Pages/Dashboard/ManageHouse/ManageHouse";
+import AddNewHouse from "../Pages/Dashboard/AddNewHouse/AddNewHouse";
 
 
 const router = new createBrowserRouter([
@@ -35,8 +39,25 @@ const router = new createBrowserRouter([
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         errorElement: <ErrorPage></ErrorPage>,
         children: [
+
+            // renter routes
             {
-                
+              path: "overview",
+              element: <Overview></Overview>  
+            },
+            {
+                path: "manageBookings",
+                element: <ManageBookings></ManageBookings>
+            },
+
+            // owner routes
+            {
+                path: "manageHouse",
+                element: <ManageHouse></ManageHouse>
+            },
+            {
+                path: "addNewHouse",
+                element: <AddNewHouse></AddNewHouse>
             }
         ]
     }

@@ -13,7 +13,8 @@ const useCheckUserRole = () => {
         return (await res).data;
     },
     initialData:{
-        admin: false
+        owner: false,
+        renter: false       
     }
    });
    if(error){

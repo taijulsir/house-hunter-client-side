@@ -6,6 +6,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic/useAxiosPublic";
 export const AuthContext = createContext(null)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [loading,setLoading] = useState(true)
     const [userEmail, setUserEmail] = useState('')
     const axiosPublic = useAxiosPublic()
 
@@ -33,9 +34,11 @@ const AuthProvider = ({ children }) => {
         const storedUser = JSON.parse(localStorage.getItem('user'))
         if(storedUser){
             setUser(storedUser)
+            setLoading(false)
         }
         if(userQueryInfo.data){
             setUser(userQueryInfo.data)
+            setLoading(false)
             // save the user data in localstorage
             localStorage.setItem('user',JSON.stringify(userQueryInfo.data))
         }
@@ -49,7 +52,7 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem("access-token")
     }
 
-    const authInfo = { user, logOut, setUserEmail, userEmail }
+    const authInfo = { user, logOut, setUserEmail, userEmail,loading }
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

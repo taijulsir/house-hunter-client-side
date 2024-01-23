@@ -4,7 +4,7 @@ import { LiaAdSolid } from "react-icons/lia";
 import { MdOutlineDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-const AdminDashboard = () => {
+const OwnerDashboard = () => {
     return (
         <div>
             <li>
@@ -71,4 +71,4 @@ const AdminDashboard = () => {
     );
 };
 
-export default AdminDashboard;
+export default OwnerDashboard;

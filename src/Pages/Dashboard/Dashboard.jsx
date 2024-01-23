@@ -5,11 +5,11 @@ import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth/useAuth";
 import useCheckUserRole from "../../Hooks/useCheckUserRole/useCheckUserRole";
-import UserDashboard from "./UserDashboard/UserDashboard";
-import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import Shared from "./Shared/Shared";
 import DashboardNav from "./DashboardNav/DashboardNav";
-import logo from "../../../src/assets/logo.png"
+import RenterDashboard from "./RenterDashboard/RenterDashboard.js";
+import OwnerDashboard from "./OwnerDashboard/OwnerDashboard.jsx.jsx";
+
 
 const Dashboard = () => {
     const [open, setOpen] = useState(true)
@@ -62,11 +62,11 @@ const Dashboard = () => {
 
                                 {/* normal user */}
                                 <ul className="mb-8 text-sm">
-                                    {user && !admin  && <UserDashboard></UserDashboard>}
+                                    {user && !admin  && <RenterDashboard></RenterDashboard>}
                                 </ul>
                                 {/* admin */}
                                 <ul className="mb-8 text-sm">
-                                    {user && admin && <AdminDashboard></AdminDashboard>}
+                                    {user && admin && <OwnerDashboard></OwnerDashboard>}
                                 </ul>
                             </div>
 

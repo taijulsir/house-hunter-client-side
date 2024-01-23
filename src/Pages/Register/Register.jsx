@@ -87,8 +87,8 @@ const Register = () => {
                                         <div>
                                             <select name="role" id="" className="w-full text-gray-500 mt-3 px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
                                                 <option value="" selected disabled className="text-gray-500">Select Role</option>
-                                                <option value="Howse Owner" className="text-gray-500">Howse Owner</option>
-                                                <option value="House Renter" className="text-gray-500">House Renter</option>
+                                                <option value="owner" className="text-gray-500">Howse Owner</option>
+                                                <option value="renter" className="text-gray-500">House Renter</option>
                                             </select>
                                         </div>
                                         {/* password */}

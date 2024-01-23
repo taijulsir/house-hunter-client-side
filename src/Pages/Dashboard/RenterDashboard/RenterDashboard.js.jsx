@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FaBook, FaHeart, FaSuperpowers } from "react-icons/fa";
 import { MdOutlineDashboard } from "react-icons/md";
 
-const UserDashboard = () => {
+const RenterDashboard = () => {
     return (
         <div>
         <li>
@@ -49,4 +49,4 @@ const UserDashboard = () => {
     );
 };
 
-export default UserDashboard;
+export default RenterDashboard;

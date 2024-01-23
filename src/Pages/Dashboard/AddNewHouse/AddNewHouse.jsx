@@ -1,11 +1,24 @@
 import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure/useAxiosSecure";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 const AddNewHouse = () => {
     const { register, handleSubmit,formState: { errors },} = useForm()
-
-    const onSubmit = (data) => {
+    const navigate = useNavigate()
+    const axiosSecure = useAxiosSecure()
+    const onSubmit = async (data) => {
         console.log(data)
+        const res = await axiosSecure.post("/api/createNewHouse",data)
+        if(res.data.insertedId){
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'House added succesfull.',
+            })
+            navigate("/manageHouse")
+        }
     }
     return (
         <div className=" min-h-screen">

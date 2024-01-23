@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 
 
 const AddNewHouse = () => {
-    const { register, handleSubmit} = useForm()
+    const { register, handleSubmit,formState: { errors },} = useForm()
 
     const onSubmit = (data) => {
         console.log(data)
@@ -15,64 +15,69 @@ const AddNewHouse = () => {
                   
                     {/* name */}
                     <div className="relative flex items-center">
-                        <input {...register('name',{required:true})} type="text" placeholder="First Name"
+                        <input {...register('name',{required:true})} type="text" placeholder="Full Name"
                             className="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm border outline-[#007bff] rounded" />
                         
                     </div>
                     {/* address */}
                     <div className="relative flex items-center">
-                        <input {...register('address',{required:true})} type="text" placeholder="Last Name"
+                        <input {...register('address',{required:true})} type="text" placeholder="Address"
                             className="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm border outline-[#007bff] rounded" />
                        
                     </div>
                     {/* city */}
                     <div className="relative flex items-center">
-                        <input {...register('city',{required:true})} type="email" placeholder="Email"
+                        <input {...register('city',{required:true})} type="text" placeholder="City Name"
                             className="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm border outline-[#007bff] rounded" />
                         
                     </div>
                     {/* bedrooms */}
                     <div className="relative flex items-center">
-                        <input {...register('bedrooms',{required:true})} type="password" placeholder="Password"
+                        <input {...register('bedrooms',{required:true})} type="number" placeholder="Bedrooms"
                             className="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm border outline-[#007bff] rounded" />
                        
                     </div>
                     {/* bathrooms */}
                     <div className="relative flex items-center">
-                        <input {...register('bathrooms',{required:true})} type="text" placeholder="First Name"
+                        <input {...register('bathrooms',{required:true})} type="number" placeholder="Bathrooms"
                             className="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm border outline-[#007bff] rounded" />
                        
                     </div>
                     {/* room size */}
                     <div className="relative flex items-center">
-                        <input {...register('size',{required:true})} type="text" placeholder="Last Name"
+                        <input {...register('size',{required:true})} type="text" placeholder="Room size"
                             className="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm border outline-[#007bff] rounded" />
                        
                     </div>
                     {/* picture */}
                     <div className="relative flex items-center">
-                        <input {...register('picture',{required:true})} type="email" placeholder="Email"
+                        <input {...register('picture',{required:true})} type="url" placeholder="House Picture"
                             className="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm border outline-[#007bff] rounded" />
                        
                     </div>
                     {/* availibility date */}
                     <div className="relative flex items-center">
-                        <input {...register('date',{required:true})} type="password" placeholder="Password"
+                        <input {...register('date',{required:true})} type="date" placeholder="Availabililty Date"
                             className="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm border outline-[#007bff] rounded" />
                        
                     </div>
                     {/* Rent per month */}
                     <div className="relative flex items-center">
-                        <input {...register('rent',{required:true})} type="text" placeholder="First Name"
+                        <input {...register('rent',{required:true})} type="number" placeholder="Rent Cost"
                             className="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm border outline-[#007bff] rounded" />
                        
                     </div>
                     {/* phone number */}
                     <div className="relative flex items-center">
-                        <input {...register('phoneNumber',{required:true})} type="text" placeholder="Last Name"
+                        <input  
+                        {...register('phoneNumber',
+                        {
+                            required:true,
+                            pattern: /^(?:\+8801|8801|01)[3456789]\d{8}$/,
+                        })} type="text" placeholder="Phone Number"
                             className="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm border outline-[#007bff] rounded" />       
                     </div>
-                   
+                   {errors.phoneNumber && <span className="text-red-600 font-medium mt-2">Please insert valid Bangladeshi number</span>}
                 </div>
                  {/* description */}
                  <div className="my-6">

@@ -1,7 +1,7 @@
 
 
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import loginAnimation from "../../Shared/LottieAnimation/login - 1699455072449.json"
 import Lottie from "lottie-react";
@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth/useAuth";
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
+    const location = useLocation()
     const navigate = useNavigate()
     const axiosPublic = useAxiosPublic()
     const { setUserEmail } = useAuth()
@@ -33,7 +34,7 @@ const Login = () => {
                 title: 'Success!',
                 text: 'Login succesfull.',
             });
-            navigate("/")
+            navigate(location?.state? location.state : "/")
         }
     }
 

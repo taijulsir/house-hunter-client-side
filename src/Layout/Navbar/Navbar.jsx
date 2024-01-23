@@ -8,8 +8,8 @@ import { useState } from "react";
 import useAuth from "../../Hooks/useAuth/useAuth";
 
 const Navbar = () => {
-    const { logOut } = useAuth()
-    const user = true;
+    const { user,logOut } = useAuth()
+    console.log(user)
     const [sideBar, setSidebar] = useState(false)
     const handleSignOUt = () => {
         logOut()
@@ -46,7 +46,7 @@ const Navbar = () => {
                         <div className="flex gap-6 items-center">
                             {/* Login functionality */}
                             <div>
-                                {user ? <p className="text-zinc-200">Welcome, <span className="text-green-600 font-semibold">{user?.displayName}</span></p> : <Link to="/login" className="flex items-center font-libreFranklin text-zinc-200"><CiUser className="text-xl mr-1"></CiUser> Login or Register</Link>}
+                                {user ? <p className="text-zinc-200">Welcome, <span className="text-green-600 font-semibold">{user?.name}</span></p> : <Link to="/login" className="flex items-center font-libreFranklin text-zinc-200"><CiUser className="text-xl mr-1"></CiUser> Login or Register</Link>}
                                 <p ></p>
                             </div>
                             {/* Number */}

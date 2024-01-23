@@ -8,8 +8,10 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [userEmail, setUserEmail] = useState('')
     const axiosPublic = useAxiosPublic()
-    // Fetch user data
-    const userQuryInfo = useQuery({
+
+
+    // Fetch specific user data
+    const userQueryInfo = useQuery({
         queryKey: [userEmail, "User Info"],
         queryFn: async () => {
             const res = await axiosPublic.get(`http://localhost:5000/api/user/${userEmail}`)
@@ -19,19 +21,31 @@ const AuthProvider = ({ children }) => {
     })
 
     // useEffect for handle refecth the user data
-   useEffect(()=>{
-    if(userEmail){
-        userQuryInfo.refetch()
-    }
-   },[userEmail,userQuryInfo])
-    // Useeffect for handle side effect
     useEffect(() => {
-        setUser(userQuryInfo.data)
-    }, [userQuryInfo.data])
-    console.log(user)
-    
+        if (userEmail) {
+            userQueryInfo.refetch()
+        }
+    }, [userEmail, userQueryInfo])
+
+
+    // Useeffect for handle side effect and store user data in local storage
+    useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem('user'))
+        if(storedUser){
+            setUser(storedUser)
+        }
+        if(userQueryInfo.data){
+            setUser(userQueryInfo.data)
+            // save the user data in localstorage
+            localStorage.setItem('user',JSON.stringify(userQueryInfo.data))
+        }
+    }, [userQueryInfo.data])
+
+
+    // logout function
     const logOut = () => {
         setUser(null)
+        localStorage.removeItem("user")
         localStorage.removeItem("access-token")
     }
 

@@ -9,7 +9,6 @@ import useAuth from "../../Hooks/useAuth/useAuth";
 
 const Navbar = () => {
     const { user,logOut } = useAuth()
-    console.log(user)
     const [sideBar, setSidebar] = useState(false)
     const handleSignOUt = () => {
         logOut()

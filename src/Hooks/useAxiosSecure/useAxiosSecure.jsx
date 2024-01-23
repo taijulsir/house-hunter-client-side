@@ -9,7 +9,7 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
     const navigate = useNavigate()
     const location = useLocation()
-    const { logout } = useAuth()
+    const { logOut } = useAuth()
 
 
     // check for access token
@@ -29,9 +29,9 @@ const useAxiosSecure = () => {
             return response;
         },
         async(error) => {
-            const status = error.response.status;
+            const status = error.response ? error.response.status : null;
             if(status === 401 || status === 403){
-                await logout();
+                await logOut();
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",

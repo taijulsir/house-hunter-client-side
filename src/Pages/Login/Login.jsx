@@ -34,7 +34,7 @@ const Login = () => {
                 title: 'Success!',
                 text: 'Login succesfull.',
             });
-            navigate(location?.state? location.state : "/")
+            navigate(location?.state ? location.state : "/dashboard")
         }
     }
 
@@ -93,7 +93,7 @@ const Login = () => {
                                                         className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                                                         name="password" type={showPassword ? "text" : "password"} placeholder="Password" required />
                                                 </div>
-                                                <div className="absolute -mt-10 ml-[380px] cursor-pointer">
+                                                <div className="absolute -mt-10 md:ml-[380px] ml-[350px]  cursor-pointer">
                                                     <button onClick={() => setShowPassword(!showPassword)}>
                                                         {
                                                             showPassword ? <FaEye className="text-2xl text-[#403F3F]"></FaEye> : <FaEyeSlash className="text-2xl text-[#403F3F]"></FaEyeSlash>

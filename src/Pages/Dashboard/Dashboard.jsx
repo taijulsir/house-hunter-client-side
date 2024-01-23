@@ -15,12 +15,13 @@ const Dashboard = () => {
     const [open, setOpen] = useState(true)
     const [dropdown, setDropdown] = useState(false)
     const { user } = useAuth()
-    const [isAdmin, isCheckRoleReloading] = useCheckUserRole()
+    const [isOwner, isCheckRoleReloading] = useCheckUserRole()
     if (isCheckRoleReloading) {
         return <span className="loading loading-spinner loading-lg"></span>
     }
-    const role = isAdmin ? isAdmin.roleInfo : null;
-    const admin = role ? role?.admin : false;
+    const role = isOwner ? isOwner.role : null;
+    const owner = role ? role?.owner : false;
+    const renter = role? role.renter : false;
    
     return (
         <div className=" font-raleway ">
@@ -58,21 +59,21 @@ const Dashboard = () => {
                             </div>
 
                             {/* routes */}
-                            <div className="pb-6 mt-4 overflow-x-hidden overflow-y-auto">
+                            <div className="pb-6 mt-4  ">
 
                                 {/* normal user */}
                                 <ul className="mb-8 text-sm">
-                                    {user && !admin  && <RenterDashboard></RenterDashboard>}
+                                    {user && !owner && renter && <RenterDashboard></RenterDashboard>}
                                 </ul>
                                 {/* admin */}
                                 <ul className="mb-8 text-sm">
-                                    {user && admin && <OwnerDashboard></OwnerDashboard>}
+                                    {user && !renter && owner && <OwnerDashboard></OwnerDashboard>}
                                 </ul>
                             </div>
 
                             <div className="divider divider-warning mt-12 px-6"></div>
                             {/* available all routes */}
-                            <div className="pb-6 mt-4 overflow-x-hidden overflow-y-auto">
+                            <div className="pb-6 mt-4  ">
                                 <ul className=" list-none">
                                     <Shared></Shared>
                                 </ul>

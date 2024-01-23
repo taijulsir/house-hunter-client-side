@@ -6,9 +6,11 @@ import register from '../../Shared/LottieAnimation/login - 1699455072449.json'
 import Lottie from "lottie-react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic/useAxiosPublic";
 import toast, { Toaster } from "react-hot-toast";
+import useAuth from "../../Hooks/useAuth/useAuth";
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const axiosPublic = useAxiosPublic()
+    const { loginUser } = useAuth()
     const navigate = useNavigate()
 
     // email Register
@@ -22,11 +24,11 @@ const Register = () => {
         const photoUrl = e.target.photoUrl.value;
 
         // check is number valid
-        if(phoneNumber.length >11 || phoneNumber.length <11){
-          return toast.error("Number will be 11 character");
+        if (phoneNumber.length > 11 || phoneNumber.length < 11) {
+            return toast.error("Number will be 11 character");
         }
         // check the password is valid
-        if(password.length < 6){
+        if (password.length < 6) {
             return toast.error("Password at least 6 character")
         }
 
@@ -38,16 +40,17 @@ const Register = () => {
         // Send data into server side
         const res = await axiosPublic.post("/api/register", userData)
         if (res.data.insertedId) {
+            loginUser(userData)
             toast.success("Register Succesful")
             navigate("/login")
         }
         else if (res.data.insertedId === null) {
-            return  toast.error("Already Registered");         
+            return toast.error("Already Registered");
         }
     }
 
-     // lottie animation
-     const defaultOptions = {
+    // lottie animation
+    const defaultOptions = {
         loop: true,
         autoplay: true,
         rendererSettings: {

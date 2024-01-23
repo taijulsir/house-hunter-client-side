@@ -7,26 +7,27 @@ import loginAnimation from "../../Shared/LottieAnimation/login - 1699455072449.j
 import Lottie from "lottie-react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic/useAxiosPublic";
 import Swal from "sweetalert2";
-
-
+import useAuth from "../../Hooks/useAuth/useAuth";
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
     const axiosPublic = useAxiosPublic()
+    const { setUserEmail } = useAuth()
     const handleEmailLogin = async (e) => {
         e.preventDefault()
         const email = e.target.email.value;
         const password = e.target.password.value;
 
-        const loginInfo = {email,password}
-        const res = await axiosPublic.post("/api/login",loginInfo)
-        if(res.status === 200){
+        const loginInfo = { email, password }
+        const res = await axiosPublic.post("/api/login", loginInfo)
+        if (res.status === 200) {
+            setUserEmail(email)
             Swal.fire({
                 icon: 'success',
                 title: 'Success!',
                 text: 'Login succesfull.',
-              });
-              navigate("/")
+            });
+            navigate("/")
         }
     }
 

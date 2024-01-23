@@ -5,13 +5,13 @@ import { Link, NavLink } from "react-router-dom";
 import { IoMenuSharp } from "react-icons/io5";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { useState } from "react";
+import useAuth from "../../Hooks/useAuth/useAuth";
 const Navbar = () => {
-    const user = false;
+    const {user,logOut} = useAuth;
+    console.log(user)
     const [sideBar, setSidebar] = useState(false)
     const handleSignOUt = () => {
-        // logout()
-        //     .then()
-        //     .catch(error => console.log(error))
+      return logOut();
     }
     const navlinks =
         <>
@@ -92,12 +92,12 @@ const Navbar = () => {
                             {user ? <div className="dropdown dropdown-end z-10">
                                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
-                                        <img src={user.photoURL} />
+                                        <img src={user.photoUrl} />
                                     </div>
                                 </label>
                                 <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-36">
 
-                                    <li className="text-xl font-bold px-1 text-blue-600">{user.displayName}</li>
+                                    <li className="text-xl font-bold px-1 text-blue-600">{user.name}</li>
                                     <li><button className="mt-4 btn hvr-sweep-to-top font-semibold text-lg border-zinc-950" onClick={handleSignOUt} >Logout</button></li>
                                 </ul>
                             </div> : ""}
@@ -142,7 +142,7 @@ const Navbar = () => {
                         <div className="dropdown dropdown-end z-10">
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
-                                    <img src={user.photoURL} alt="User Avatar" />
+                                    <img src={user.photoUrl} alt="User Avatar" />
                                 </div>
                             </label>
                             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-36">

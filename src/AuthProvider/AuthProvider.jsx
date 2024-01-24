@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
     const userQueryInfo = useQuery({
         queryKey: [userEmail, "User Info"],
         queryFn: async () => {
-            const res = await axiosPublic.get(`http://localhost:5000/api/user/${userEmail}`)
+            const res = await axiosPublic.get(`https://house-hunter-server-side-alpha.vercel.app/api/user/${userEmail}`)
             return res.data;
         },
         enabled: false

@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic/useAxiosPublic";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const HouseCard = ({ house }) => {
@@ -54,11 +55,7 @@ const HouseCard = ({ house }) => {
         const renterInfo = {houseId,renterEmail,renterImage,renterName,number}
         const res = await axiosPublic.post("/api/bookHouse",renterInfo)
         if(res.data.insertedId){
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: 'Booking succesfull.',
-            });
+            toast.success("Booking succes")
         }
         
     }
@@ -145,6 +142,7 @@ const HouseCard = ({ house }) => {
                     </div>
                 </div>
             </div>
+            <Toaster></Toaster>
         </div>
     );
 };

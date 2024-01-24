@@ -4,7 +4,7 @@ import useAuth from "../useAuth/useAuth";
 import Swal from "sweetalert2";
 
 const axiosSecure = axios.create({
-    baseURL: "http://localhost:5000"
+    baseURL: "https://house-hunter-server-side-alpha.vercel.app"
 })
 const useAxiosSecure = () => {
     const navigate = useNavigate()

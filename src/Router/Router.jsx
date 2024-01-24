@@ -63,7 +63,7 @@ const router = new createBrowserRouter([
             {
                 path: "updateHouse/:id",
                 element: <UpdateHouse></UpdateHouse>,
-                loader: ({params}) => fetch(`http://localhost:5000/api/singleHouse/${params.id}`)
+                loader: ({params}) => fetch(`https://house-hunter-server-side-alpha.vercel.app/api/singleHouse/${params.id}`)
             }
 
         ]

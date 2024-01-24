@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { Link } from "react-router-dom";
+
 import { IoIosHeartEmpty } from "react-icons/io";
 import { BsCart2 } from "react-icons/bs";
 import { CiLocationOn } from "react-icons/ci";
@@ -9,9 +9,59 @@ import { MdOutlineVerifiedUser } from "react-icons/md";
 import { LiaBathSolid } from "react-icons/lia";
 import { IoBedOutline } from "react-icons/io5";
 import { SlSizeActual } from "react-icons/sl";
+import useAuth from "../../../Hooks/useAuth/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic/useAxiosPublic";
 
 
 const HouseCard = ({ house }) => {
+    const { user } = useAuth()
+    const [phoneNumber, setphoneNumber] = useState("")
+    const axiosPublic = useAxiosPublic()
+    const navigate = useNavigate()
+
+    // model functionality
+    const handleBookings = () => {
+        if (!user) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You can book this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, sure!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/login")
+                }
+            });
+        }
+        else if (user) {
+            document.getElementById('my_modal_3').showModal()
+        }
+    }
+
+    // Booking model
+    const handleBookingModel = async (id) => {
+        const houseId = id;
+        const renterName = user.name;
+        const renterImage = user.displayUrl;
+        const renterEmail = user.email;
+        const number = phoneNumber
+        const renterInfo = {houseId,renterEmail,renterImage,renterName,number}
+        const res = await axiosPublic.post("/api/bookHouse",renterInfo)
+        if(res.data.insertedId){
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Booking succesfull.',
+            });
+        }
+        
+    }
     return (
         <div>
             <div className="px-5 lg:px-0">
@@ -56,8 +106,34 @@ const HouseCard = ({ house }) => {
                             </div>
 
                             <div className="flex gap-5">
-                                <div  className="w-full">
-                                    <button className="btn border-zinc-950 hvr-sweep-to-top mt-2 text-lg w-full">Book Now</button>
+
+                                {/* Booking functionality */}
+                                <div className="w-full">
+                                    <button onClick={handleBookings} className="btn border-zinc-950 hvr-sweep-to-top mt-2 text-lg w-full">Book Now</button>
+                                    <dialog id="my_modal_3" className="modal">
+                                        <div className="modal-box">
+                                            <form method="dialog">
+                                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                            </form>
+
+                                            {/* form */}
+                                            <div>
+                                                <h3 className="text-2xl my-3 font-semibold"></h3>
+                                                <div className="flex flex-col items-center">
+                                                    <img src={user?.photoUrl} className="w-28 h-w-28 rounded-full object-cover" />
+                                                    <div className="mt-4 text-center">
+                                                        <p className="text-2xl text-[#333] font-bold">{user?.name}</p>
+                                                        <p className="text-sm text-gray-400 mb-6">{user?.email}</p>
+                                                    </div>
+                                                </div>
+                                                <form onChange={e => setphoneNumber(e.target.value)} className=" space-y-6">
+                                                    <textarea placeholder="Your Number..." className="textarea textarea-bordered textarea-lg w-full " ></textarea>
+                                                </form>
+                                                <button onClick={() => handleBookingModel(house._id)} className="btn w-full bg-amber-600 my-3">Booking Now</button>
+
+                                            </div>
+                                        </div>
+                                    </dialog>
                                 </div>
                                 <div className="flex items-center w-full">
                                     <p className="flex items-center text-zinc-950 text-xl mr-2"><LiaBathSolid className="text-2xl  mr-2"></LiaBathSolid> {house.bath} </p>

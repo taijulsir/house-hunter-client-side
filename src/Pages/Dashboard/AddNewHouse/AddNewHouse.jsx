@@ -34,7 +34,7 @@ const AddNewHouse = () => {
                 title: 'Success!',
                 text: 'House added succesfull.',
             })
-            navigate("/manageHouse")
+            navigate("/dashboard/manageHouse")
         }
     }
     return (
@@ -45,7 +45,7 @@ const AddNewHouse = () => {
 
                     {/* name */}
                     <div className="relative flex items-center">
-                        <input {...register('name', { required: true })} type="text" placeholder="Full Name"
+                        <input {...register('name', { required: true })} type="text" placeholder="House Name"
                             className="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm border outline-[#007bff] rounded" />
 
                     </div>

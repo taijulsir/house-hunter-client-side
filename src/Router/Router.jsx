@@ -10,6 +10,7 @@ import Overview from "../Pages/Dashboard/Overview/Overview";
 import ManageBookings from "../Pages/Dashboard/ManageBookings/ManageBookings";
 import ManageHouse from "../Pages/Dashboard/ManageHouse/ManageHouse";
 import AddNewHouse from "../Pages/Dashboard/AddNewHouse/AddNewHouse";
+import UpdateHouse from "../Pages/Dashboard/UpdateHouse/UpdateHouse";
 
 
 const router = new createBrowserRouter([
@@ -42,8 +43,8 @@ const router = new createBrowserRouter([
 
             // renter routes
             {
-              path: "overview",
-              element: <Overview></Overview>  
+                path: "overview",
+                element: <Overview></Overview>
             },
             {
                 path: "manageBookings",
@@ -58,7 +59,12 @@ const router = new createBrowserRouter([
             {
                 path: "addNewHouse",
                 element: <AddNewHouse></AddNewHouse>
+            },
+            {
+                path: "updateHouse",
+                element: <UpdateHouse></UpdateHouse>
             }
+
         ]
     }
 ])

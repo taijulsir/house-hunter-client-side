@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 
 const UpdateHouse = () => {
     const house = useLoaderData()
-    const {name,address,city, bedrooms,bathrooms, size,picture, availabilityDate, rentPerMonth,phoneNumber , description} = house
+    const {_id,name,address,city, bedrooms,bathrooms, size,picture, availabilityDate, rentPerMonth,phoneNumber , description} = house
     const {user} = useAuth()
     const { register, handleSubmit, formState: { errors }, } = useForm()
     const navigate = useNavigate()
@@ -29,16 +29,15 @@ const UpdateHouse = () => {
             ownerName: user?.name,
             ownerImage: user?.photoUrl
         }
-        const res = await axiosSecure.post("/api/createNewHouse", houseInfo)
-        if (res.data.insertedId) {
+        const res = await axiosSecure.put(`/api/updateHouse/${_id}`, houseInfo)
+        if (res.data.modifiedCount > 0) {
             Swal.fire({
                 icon: 'success',
                 title: 'Success!',
-                text: 'House added succesfull.',
+                text: 'House updated succesfull.',
             })
             navigate("/dashboard/manageHouse")
         }}
-    console.log(house)
     return (
         <div className=" min-h-screen">
             <form onSubmit={handleSubmit(onSubmit)} className="font-[sans-serif] max-w-4xl mx-auto mt-20">

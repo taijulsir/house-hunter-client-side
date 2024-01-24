@@ -63,7 +63,7 @@ const router = new createBrowserRouter([
             {
                 path: "updateHouse/:id",
                 element: <UpdateHouse></UpdateHouse>,
-                loader: ({params}) => fetch(`http://localhost:5000//api/updateHouse/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:5000/api/singleHouse/${params.id}`)
             }
 
         ]

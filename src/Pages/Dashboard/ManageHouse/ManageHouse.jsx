@@ -2,7 +2,6 @@
 
 import { FaRegEdit } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
-import { LuUserCog } from "react-icons/lu";
 import { MdOutlineDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure/useAxiosSecure";
